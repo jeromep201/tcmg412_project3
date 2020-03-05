@@ -3,19 +3,21 @@ import datetime
 import os
 from collections import Counter
 import datetime
+from urllib.request import urlretrieve
+
+url1 = 'https://s3.amazonaws.com/tcmg476/http_access_log'
+local_file = 'local_copy.log'
 
 # Checking if file is on disk
-FILE_NAME = "/Users/jeromeporter/Desktop/Spring 2020/TCMG_412/project3.log"
+FILE_NAME = "/Users/jeromeporter/Desktop/Spring 2020/TCMG_412/project3_log.log"
 if os.path.exists(FILE_NAME):
     print('File found: Parsing has begun\n')
     #Open file from local disk
     fh = open(FILE_NAME)    
 else:
-    print('File not found... Downloading now....')
-    url_path = 'https://s3.amazonaws.com/tcmg476/http_access_log'
-    local_file, headers = urlretrieve(url_path, local_file) 
-    #Open file from local disk
-    fh = open(url_path)    
+    print('File not found.....Downloading now')
+    local_file, headers = urlretrieve(url1, local_file) 
+    fh = open(local_file)   
 
 # Variables
 Errors = []
